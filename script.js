@@ -31,12 +31,15 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+////////////////////////////////////////////
 
-const massage = document.createElement('div')
-massage.classList.add('cookie-message')
-massage.innerHTML = `we can use it in dom  <button class='btn btn--close-cookie'>got it ;</button>`
-console.log(massage.childNodes);
-header.before(massage)
-document.querySelector('.btn--close-cookie').addEventListener('click', function () {
-  massage.remove()
-})
+// const massage = document.createElement('div')
+// massage.classList.add('cookie-message')
+// massage.innerHTML = `we can use it in dom  <button class='btn btn--close-cookie'>got it ;</button>`
+// console.log(massage.childNodes);
+// header.before(massage)
+// document.querySelector('.btn--close-cookie').addEventListener('click', function () {
+//   massage.remove()
+// })
+
+document.documentElement.style.setProperty('--color-primary', '#ff585f')
