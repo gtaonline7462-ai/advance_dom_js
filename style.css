@@ -311,7 +311,11 @@ h4 {
 }
 
 .operations__tab--active {
-  transform: translateY(-66%);
+  transform: translateY(-80%);
+  -webkit-transform: translateY(-80%);
+  -moz-transform: translateY(-80%);
+  -ms-transform: translateY(-80%);
+  -o-transform: translateY(-80%);
 }
 
 .operations__content {
