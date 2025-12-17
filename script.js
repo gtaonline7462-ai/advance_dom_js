@@ -7,16 +7,18 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
-const header = document.querySelector('.header')
-const btnScroll = document.querySelector('.btn--scroll-to')
-const section1 = document.querySelector('#section--1')
-const tap = document.querySelectorAll('.operations__tab')
-const tapcontainer = document.querySelector('.operations__tab-container')
+const header = document.querySelector('.header');
+const btnScroll = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+const tap = document.querySelectorAll('.operations__tab');
+const tapcontainer = document.querySelector('.operations__tab-container');
 
-const tapsContent = document.querySelectorAll('.operations__content')
+const tapsContent = document.querySelectorAll('.operations__content');
+
+const nav = document.querySelector('.nav');
 
 const openModal = function (e) {
-  e.preventDefault()
+  e.preventDefault();
   console.log(e.target);
   modal.classList.remove('hidden');
   overlay.classList.remove('hidden');
@@ -27,8 +29,7 @@ const closeModal = function () {
   overlay.classList.add('hidden');
 };
 
-btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal))
-
+btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
 
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
@@ -40,15 +41,15 @@ document.addEventListener('keydown', function (e) {
 });
 //smooth scroll
 btnScroll.addEventListener('click', function () {
-  section1.scrollIntoView({ behavior: "smooth" })
-})
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
 document.querySelector('.nav__links').addEventListener('click', function (e) {
-  e.preventDefault()
+  e.preventDefault();
   if (e.target.classList.contains('nav__link')) {
-    const id = e.target.getAttribute('href')
-    document.querySelector(id).scrollIntoView({ behavior: 'smooth' })
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
-})
+});
 
 ////////////////////////////////////////////
 
@@ -85,7 +86,6 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 // )
 // setTimeout(() => h1.removeEventListener('mouseenter', alertevent), 10000)
 
-
 //////////////////////
 //create random color
 // const randomint = (min, max) => Math.floor(Math.random() * (max - min) + min)
@@ -94,7 +94,6 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 // };
 
 // document.querySelector('.nav__link').addEventListener('click', function (e) {
-
 
 //   this.style.backgroundColor = randomColor()
 // })
@@ -108,21 +107,42 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 //   })
 // )
 
-
-
 tapcontainer.addEventListener('click', function (e) {
-  e.preventDefault()
+  e.preventDefault();
 
-
-  const clicked = e.target.closest('.operations__tab')
+  const clicked = e.target.closest('.operations__tab');
   if (!clicked) return;
-  tap.forEach(t => t.classList.remove('operations__tab--active'))
-  if (clicked) { clicked.classList.add('operations__tab--active') }
+  tap.forEach(t => t.classList.remove('operations__tab--active'));
+  if (clicked) {
+    clicked.classList.add('operations__tab--active');
+  }
 
-  tapsContent.forEach(tp => tp.classList.remove('operations__content--active'))
+  tapsContent.forEach(tp => tp.classList.remove('operations__content--active'));
 
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+});
 
-  document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active')
-
-
-})
+//Hover_handeler
+const hoverhandeler = function (e, opacity) {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const sibling = link.closest('nav').querySelectorAll('.nav__link');
+    const logo = link.closest('nav').querySelector('img');
+    sibling.forEach(el => {
+      if (el !== link) {
+        el.style.opacity = opacity;
+        logo.style.opacity = opacity;
+      }
+    });
+  }
+};
+nav.addEventListener('mouseover', function (e) {
+  e.preventDefault();
+  hoverhandeler(e, 0.3);
+});
+nav.addEventListener('mouseout', function (e) {
+  e.preventDefault();
+  hoverhandeler(e, 1);
+});
